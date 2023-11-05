@@ -1,0 +1,10 @@
+C:\Users\anton\source\repos\SortAll\SortAll\bin\Debug\SortAll.exe.config
+C:\Users\anton\source\repos\SortAll\SortAll\bin\Debug\SortAll.exe
+C:\Users\anton\source\repos\SortAll\SortAll\bin\Debug\SortAll.pdb
+C:\Users\anton\source\repos\SortAll\SortAll\obj\Debug\SortAll.csproj.AssemblyReference.cache
+C:\Users\anton\source\repos\SortAll\SortAll\obj\Debug\SortAll.Form1.resources
+C:\Users\anton\source\repos\SortAll\SortAll\obj\Debug\SortAll.Properties.Resources.resources
+C:\Users\anton\source\repos\SortAll\SortAll\obj\Debug\SortAll.csproj.GenerateResource.cache
+C:\Users\anton\source\repos\SortAll\SortAll\obj\Debug\SortAll.csproj.CoreCompileInputs.cache
+C:\Users\anton\source\repos\SortAll\SortAll\obj\Debug\SortAll.exe
+C:\Users\anton\source\repos\SortAll\SortAll\obj\Debug\SortAll.pdb
