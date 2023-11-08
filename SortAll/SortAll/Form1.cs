@@ -47,24 +47,28 @@ namespace SortAll
 
         }
 
+        Stopwatch stopwatch;
+
         private void button2_Click(object sender, EventArgs e)
         {
 
-            Stopwatch stopwatch = new Stopwatch();
+            this.bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_DoWorkBubbleSort);
+
+            stopwatch = new Stopwatch();
 
             stopwatch.Start();
 
+            timer1.Start();
+
             int[] numbers = SortS();
 
-            BubbleSort(numbers);
+            var numbers_c = numbers.ToArray();
+
+            this.bw.RunWorkerAsync(numbers_c);
+
+            this.bw.DoWork -= new System.ComponentModel.DoWorkEventHandler(this.bw_DoWorkBubbleSort);
 
             Res(numbers);
-
-            stopwatch.Stop();
-
-            long elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-
-            label2.Text = "" + elapsedMilliseconds + "";
         }
 
         private int[] SortS()
@@ -114,21 +118,23 @@ namespace SortAll
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
+            this.bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_DoWorkSelectionSort);
+
+            stopwatch = new Stopwatch();
 
             stopwatch.Start();
 
+            timer1.Start();
+
             int[] numbers = SortS();
 
-            SelectionSort(numbers);
+            var numbers_c = numbers.ToArray();
+
+            this.bw.RunWorkerAsync(numbers_c);
+
+            this.bw.DoWork -= new System.ComponentModel.DoWorkEventHandler(this.bw_DoWorkSelectionSort);
 
             Res(numbers);
-
-            stopwatch.Stop();
-
-            long elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-
-            label2.Text = "" + elapsedMilliseconds + "";
         }
 
         private void SelectionSort(int[] arr)
@@ -156,21 +162,23 @@ namespace SortAll
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
+            this.bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_DoWorkInsertionSort);
+
+            stopwatch = new Stopwatch();
 
             stopwatch.Start();
 
+            timer1.Start();
+
             int[] numbers = SortS();
 
-            InsertionSort(numbers);
+            var numbers_c = numbers.ToArray();
+
+            this.bw.RunWorkerAsync(numbers_c);
+
+            this.bw.DoWork -= new System.ComponentModel.DoWorkEventHandler(this.bw_DoWorkInsertionSort);
 
             Res(numbers);
-
-            stopwatch.Stop();
-
-            long elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-
-            label2.Text = "" + elapsedMilliseconds + "";
         }
 
         private void InsertionSort(int[] arr)
@@ -193,21 +201,23 @@ namespace SortAll
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
+            this.bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_DoWorkMergeSort);
+
+            stopwatch = new Stopwatch();
 
             stopwatch.Start();
 
+            timer1.Start();
+
             int[] numbers = SortS();
 
-            MergeSort(numbers);
+            var numbers_c = numbers.ToArray();
+
+            this.bw.RunWorkerAsync(numbers_c);
+
+            this.bw.DoWork -= new System.ComponentModel.DoWorkEventHandler(this.bw_DoWorkMergeSort);
 
             Res(numbers);
-
-            stopwatch.Stop();
-
-            long elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-
-            label2.Text = "" + elapsedMilliseconds + "";
         }
 
         private void MergeSort(int[] arr)
@@ -270,21 +280,23 @@ namespace SortAll
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
+            this.bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_DoWorkQuickSort);
+
+            stopwatch = new Stopwatch();
 
             stopwatch.Start();
 
+            timer1.Start();
+
             int[] numbers = SortS();
 
-            QuickSort(numbers, 0, numbers.Length - 1);
+            var numbers_c = numbers.ToArray();
+
+            this.bw.RunWorkerAsync(numbers_c);
+
+            this.bw.DoWork -= new System.ComponentModel.DoWorkEventHandler(this.bw_DoWorkQuickSort);
 
             Res(numbers);
-
-            stopwatch.Stop();
-
-            long elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-
-            label2.Text = "" + elapsedMilliseconds + "";
         }
 
         private void QuickSort(int[] arr, int low, int high)
@@ -341,6 +353,61 @@ namespace SortAll
             }
 
             textBox1.Text = numbersText.Trim();
+        }
+
+        private void bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void bw_DoWorkBubbleSort(object sender, DoWorkEventArgs e)
+        {
+            int[] tab = e.Argument as int[];
+
+            BubbleSort(tab);
+            timer1.Stop();
+        }
+
+        private void bw_DoWorkSelectionSort(object sender, DoWorkEventArgs e)
+        {
+            int[] tab = e.Argument as int[];
+
+            SelectionSort(tab);
+            timer1.Stop();
+        }
+
+        private void bw_DoWorkInsertionSort(object sender, DoWorkEventArgs e)
+        {
+            int[] tab = e.Argument as int[];
+
+            InsertionSort(tab);
+            timer1.Stop();
+        }
+
+        private void bw_DoWorkMergeSort(object sender, DoWorkEventArgs e)
+        {
+            int[] tab = e.Argument as int[];
+
+            MergeSort(tab);
+            timer1.Stop();
+        }
+
+        private void bw_DoWorkQuickSort(object sender, DoWorkEventArgs e)
+        {
+            int[] tab = e.Argument as int[];
+
+            QuickSort(tab, 0, tab.Length - 1);
+            timer1.Stop();
+        }
+
+        private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            stopwatch.Stop();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label2.Text = stopwatch.Elapsed.ToString();
         }
     }
 }
